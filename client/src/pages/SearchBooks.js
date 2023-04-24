@@ -7,10 +7,11 @@ import {
   Card,
   Row
 } from 'react-bootstrap';
-
+import { SAVE_BOOK } from "../utils/mutations";
 import Auth from '../utils/auth';
 import { saveBook, searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
+import { useMutation } from "@apollo/client";
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -18,6 +19,8 @@ const SearchBooks = () => {
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
 
+  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+  
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
