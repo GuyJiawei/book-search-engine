@@ -61,6 +61,7 @@ const resolvers = {
       };
     },
     saveBook: async (parent, { bookData }, context) => {
+      console.log('Backend Hit');
       const user = context.user;
       console.log(user);
       try {
