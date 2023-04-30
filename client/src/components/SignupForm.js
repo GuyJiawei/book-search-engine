@@ -13,9 +13,7 @@ const SignupForm = () => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  const [createUser, { error }] = useMutation(ADD_USER, {
-    refetchQueries: [QUERY_ME, "me"],
-  });
+  const [createUser, { error }] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -33,13 +31,11 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await createUser({ variables: { ...userFormData } });
+      console.log(userFormData);
+      const { data } = await createUser({ variables: { ...userFormData } });
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
 
-      const { data } = response;
+
       const token = data.addUser.token;
       const user = data.addUser.user;
       console.log(user);
